@@ -49,7 +49,7 @@ namespace RegistroDePrioridadesMABB1.BLL
                     .AsNoTracking()
                     .SingleOrDefault(a => a.PrioridadId == PrioridadId);
         }
-        public List<Prioridades> Listar(Expression<Func<Prioridades, bool>> Criterio)
+        public List<Prioridades> Getlist(Expression<Func<Prioridades, bool>> Criterio)
         {
             return _contexto.Prioridades.Where(Criterio).AsNoTracking().ToList();
         }
