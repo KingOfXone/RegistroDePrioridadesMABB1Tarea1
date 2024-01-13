@@ -12,6 +12,6 @@ namespace RegistroDePrioridadesMABB1.Models
 
         [Required(ErrorMessage = "Los dias de comprimiso deben ser validos")]
         [Range(1, 31, ErrorMessage = "Los dias de comprimiso deben ser validos")]
-        public int DiasCompromiso { get; set; } = 0;
+        public int DiasCompromiso { get; set; }
     }
 }

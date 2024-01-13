@@ -41,13 +41,13 @@ namespace RegistroDePrioridadesMABB1.BLL
         public bool Insertar(Prioridades Prioridades)
         {
             _contexto.Prioridades.Add(Prioridades);
-            return _contexto.SaveChanges() == 0;
+            return _contexto.SaveChanges() > 0;
         }
         public Prioridades? Buscar(int PrioridadId)
         {
             return _contexto.Prioridades
                     .AsNoTracking()
-                    .SingleOrDefault(a => a.PrioridadId == PrioridadId);
+                    .SingleOrDefault(a => a.PrioridadId > PrioridadId);
         }
         public List<Prioridades> Getlist(Expression<Func<Prioridades, bool>> Criterio)
         {
