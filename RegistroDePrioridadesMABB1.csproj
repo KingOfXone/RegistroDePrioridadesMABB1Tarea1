@@ -15,4 +15,8 @@
     <PackageReference Include="radzen.blazor" Version="4.23.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>
