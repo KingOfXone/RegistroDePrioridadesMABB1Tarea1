@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RegistroDePrioridadesMABB1.DAL;
 using RegistroDePrioridadesMABB1.Models;
+using System.Linq.Expressions;
 
 namespace RegistroDePrioridadesMABB1.BLL
 {
@@ -42,4 +43,15 @@ namespace RegistroDePrioridadesMABB1.BLL
             _contexto.Prioridades.Add(Prioridades);
             return _contexto.SaveChanges() == 0;
         }
+        public Prioridades? Buscar(int PrioridadId)
+        {
+            return _contexto.Prioridades
+                    .AsNoTracking()
+                    .SingleOrDefault(a => a.PrioridadId == PrioridadId);
+        }
+        public List<Prioridades> Listar(Expression<Func<Prioridades, bool>> Criterio)
+        {
+            return _contexto.Prioridades.Where(Criterio).AsNoTracking().ToList();
+        }
+      }
     }
