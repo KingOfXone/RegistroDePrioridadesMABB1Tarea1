@@ -43,12 +43,11 @@ namespace RegistroDePrioridadesMABB1.BLL
             _contexto.Prioridades.Add(Prioridades);
             return _contexto.SaveChanges() > 0;
         }
-        public Prioridades? Buscar(int PrioridadId)
+        public async Task<Prioridades?> Buscar(int id)
         {
-            return _contexto.Prioridades
-                    .AsNoTracking()
-                    .SingleOrDefault(a => a.PrioridadId > PrioridadId);
-        }
+            return await _contexto.Prioridades.FindAsync(id);
+        
+    }
         public List<Prioridades> Getlist(Expression<Func<Prioridades, bool>> Criterio)
         {
             return _contexto.Prioridades.Where(Criterio).AsNoTracking().ToList();
