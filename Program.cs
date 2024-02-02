@@ -1,10 +1,10 @@
-using ClientesMABB.Components;
-using ClientesMABB.DAL;
+using TicketsMABB3.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
-using ClientesMABB.BLL;
+using TicketsMABB3.DAL;
+using TicketsMABB3.BLLoServices;
 
-
-namespace RegistroDePrioridadesMABB1
+namespace TicketsMABB3
 {
     public class Program
     {
@@ -13,7 +13,7 @@ namespace RegistroDePrioridadesMABB1
             var builder = WebApplication.CreateBuilder(args);
             var ConStr = builder.Configuration.GetConnectionString("ConStr");
             builder.Services.AddDbContext<Contexto>(options => options.UseSqlite(ConStr));
-            builder.Services.AddScoped<ClientesBLL>();
+            builder.Services.AddScoped<ServicesTickets>();
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
 
@@ -36,10 +36,12 @@ namespace RegistroDePrioridadesMABB1
             app.UseStaticFiles();
             app.UseAntiforgery();
 
-                 app.MapRazorComponents<App>()
-                .AddInteractiveServerRenderMode();
+            app.MapRazorComponents<App>()
+           .AddInteractiveServerRenderMode();
 
             app.Run();
         }
+
     }
 }
+

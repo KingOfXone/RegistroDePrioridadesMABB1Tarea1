@@ -1,11 +1,10 @@
-﻿using ClientesMABB.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace ClientesMABB.DAL
+namespace TicketsMABB3.DAL
 {
-    public class Contexto:DbContext
+    public class Contexto :DbContext
     {
-        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Models.Tickets> Tickets { get; set; }
         public Contexto(DbContextOptions<Contexto> options) : base(options) { }
     }
 }
