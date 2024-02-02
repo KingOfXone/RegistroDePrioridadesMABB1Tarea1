@@ -1,0 +1,168 @@
+﻿ @page "/R-Cliente"
+ @page "/R-Cliente/{ClienteId:int}"
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+@using ClientesMABB.BLL
+@using ClientesMABB.Models
+@using System.Globalization;
+@rendermode InteractiveServer
+@inject ClientesBLL ClientesBLL
+
+<PageTitle>Registro de Clientes</PageTitle>
+
+<EditForm Model="Cliente" OnValidSubmit="Guardar" FormName="ClienteForm">
+    <DataAnnotationsValidator />
+
+    <div class="container">
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <h3 class="centrar-texto">Registrar Clientes</h3>
+            </div>
+            <div class=card-body>
+
+                @*ClienteId*@
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
+                    <label>ClienteId:</label>
+                    <div class="input-group mb-3">
+                        <InputNumber @bind-Value="Cliente.ClienteId" class="form-control" aria-describedby="BotonBuscar" />
+                        <button @onclick="Buscar" class="btn btn-outline-primary" type="button" id="BotonBuscar"><i class="oi oi-magnifying-glass" /></button>
+                    </div>
+                </div>
+
+                @*Nombres*@
+                <div class="mb-3">
+                    <label class="form-label" for="Nombres">Nombres:</label>
+                    <InputText @bind-Value="Cliente.Nombres" @onblur="NombreACapital" class="form-control" placeholder="Nombres" />
+                    <ValidationMessage For="@(() => Cliente.Nombres)" />
+                </div>
+
+                @*Telefono*@
+                <div class="mb-3">
+                    <label class="form-label">Telefono</label>
+                    <InputText @bind-Value="Cliente.Telefono" class="form-control" placeholder="123-456-7890" />
+                    <ValidationMessage For="@(() => Cliente.Telefono)" />
+                </div>
+
+                @*Celular*@
+                <div class="mb-3">
+                    <label class="form-label">Celular</label>
+                    <InputText @bind-Value="Cliente.Celular" class="form-control" placeholder="123-456-7890" />
+                    <ValidationMessage For="@(() => Cliente.Celular)" />
+                </div>
+
+                @*Rnc*@
+                <div class="mb-3">
+                    <label class="form-label">Rnc</label>
+                    <InputText @bind-Value="Cliente.Rnc" class="form-control" placeholder="000000000" />
+                    <ValidationMessage For="@(() => Cliente.Rnc)" />
+                </div>
+
+                @*Email*@
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <InputText @bind-Value="Cliente.Email" @onblur="Minuscula" class="form-control" placeholder="Ejemplo@gmail.com" />
+                    <ValidationMessage For="@(() => Cliente.Email)" />
+                </div>
+
+                @*Dirección*@
+                <div class="mb-3">
+                    <label class="form-label">Dirección</label>
+                    <InputText @bind-Value="Cliente.Direccion" class="form-control" placeholder="Dirección" />
+                    <ValidationMessage For="@(() => Cliente.Direccion)" />
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer d-flex justify-content-center">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" @onclick="Nuevo">Nuevo <i class="oi oi-file" /></button>
+                <button type="submit" class="btn btn-success">Guardar <i class="oi oi-document" /></button>
+                <button type="button" class="btn btn-danger" @onclick="Eliminar"> Eliminar <i class="oi oi-trash" /></button>
+            </div>
+        </div>
+    </div>
+
+</EditForm>
+<label class="centrar-texto">@Mensaje</label>
+
+@code {
+    [Parameter]
+    public int ClienteId { get; set; }
+
+    public Cliente Cliente { get; set; } = new Cliente();
+    public string Mensaje { get; set; } = string.Empty;
+
+    private void NombreACapital()
+    {
+        Cliente.Nombres = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Cliente.Nombres.ToLower());
+    }
+
+    private void Minuscula()
+    {
+
+        Cliente.Email = Cliente.Email.ToLower();
+    }
+
+
+    protected override void OnInitialized()
+    {
+        if (ClienteId > 0)
+        {
+            this.Cliente.ClienteId = ClienteId;
+            this.Buscar();
+        }
+    }
+
+    void Buscar()
+    {
+
+        var prioridadEncontrada = ClientesBLL.Buscar(Cliente.ClienteId);
+        Mensaje = string.Empty;
+        if (prioridadEncontrada != null)
+        {
+            this.Cliente = prioridadEncontrada;
+
+        }
+        else
+        {
+            this.Cliente = new Cliente();
+
+            Mensaje = "No se encontro el cliente";
+        }
+    }
+
+    void Nuevo()
+    {
+
+        this.Cliente = new Cliente();
+        Mensaje = string.Empty;
+    }
+
+    void Guardar()
+    {
+        Mensaje = string.Empty;
+        if (Cliente.ClienteId < 0)
+        {
+            Mensaje = "No pudo guardar el cliente";
+            return;
+        }
+        if (ClientesBLL.Guardar(this.Cliente))
+        {
+            Mensaje = "Se guardo correctamente el cliente";
+            this.Cliente = new Cliente();
+        }
+    }
+
+    void Eliminar()
+    {
+        Mensaje = string.Empty;
+        if (ClientesBLL.Eliminar(Cliente))
+            Mensaje = "Se ha eliminado correctamente el cliente";
+        else
+            Mensaje = "No se pudo eliminar el cliente";
+        this.Cliente = new Cliente();
+
+    }
+}
+
+

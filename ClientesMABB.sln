@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegistroDePrioridadesMABB1", "RegistroDePrioridadesMABB1.csproj", "{8F60CBC1-9F53-46F5-BE1C-212E4D9AC0E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientesMABB", "ClientesMABB.csproj", "{675ECBC7-2B97-41E7-BDEC-41CA8EB25014}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8F60CBC1-9F53-46F5-BE1C-212E4D9AC0E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F60CBC1-9F53-46F5-BE1C-212E4D9AC0E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F60CBC1-9F53-46F5-BE1C-212E4D9AC0E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F60CBC1-9F53-46F5-BE1C-212E4D9AC0E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{675ECBC7-2B97-41E7-BDEC-41CA8EB25014}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{675ECBC7-2B97-41E7-BDEC-41CA8EB25014}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{675ECBC7-2B97-41E7-BDEC-41CA8EB25014}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{675ECBC7-2B97-41E7-BDEC-41CA8EB25014}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D45410C7-D18C-4832-843A-226058F0C338}
+		SolutionGuid = {061A181B-E642-450A-A7AD-04E4C7E1B0B7}
 	EndGlobalSection
 EndGlobal

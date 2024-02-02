@@ -1,7 +1,8 @@
+using ClientesMABB.Components;
+using ClientesMABB.DAL;
 using Microsoft.EntityFrameworkCore;
-using RegistroDePrioridadesMABB1.BLL;
-using RegistroDePrioridadesMABB1.Components;
-using RegistroDePrioridadesMABB1.DAL;
+using ClientesMABB.BLL;
+
 
 namespace RegistroDePrioridadesMABB1
 {
@@ -12,7 +13,9 @@ namespace RegistroDePrioridadesMABB1
             var builder = WebApplication.CreateBuilder(args);
             var ConStr = builder.Configuration.GetConnectionString("ConStr");
             builder.Services.AddDbContext<Contexto>(options => options.UseSqlite(ConStr));
-            builder.Services.AddScoped<PrioridadesBLL>();
+            builder.Services.AddScoped<ClientesBLL>();
+            builder.Services.AddRazorPages();
+            builder.Services.AddServerSideBlazor();
 
             // Add services to the container.
             builder.Services.AddRazorComponents()
@@ -33,11 +36,10 @@ namespace RegistroDePrioridadesMABB1
             app.UseStaticFiles();
             app.UseAntiforgery();
 
-            app.MapRazorComponents<App>()
+                 app.MapRazorComponents<App>()
                 .AddInteractiveServerRenderMode();
 
             app.Run();
         }
     }
 }
-
