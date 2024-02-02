@@ -1,0 +1,91 @@
+﻿@* @page "/C-Prioridad"
+@inject PrioridadesBLL prioridadBLL
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+@using TicketsMABB3.BLL
+@using TicketsMABB3.Models
+@using System.Globalization;
+@rendermode InteractiveServer
+
+<PageTitle>Consulta de Clientes</PageTitle>
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="centrar-texto">Consulta de Clientes</h3>
+    </div>
+
+    <div class="card-body">
+        <div>
+            <label>Consultar Todo</label>
+            <button type="button" @onclick="BuscarTodo" class="btn btn-primary input-group-text">
+                <i class="oi oi-magnifying-glass " />
+            </button>
+        </div>
+        <br />
+        <div>
+            <label>Consultar por ID</label>
+            <InputNumber @bind-Value="prioridadId" aria-describedby="BotonBuscar" />
+            <button type="button" @onclick="BuscarId" class="btn btn-primary input-group-text">
+                <i class="oi oi-magnifying-glass " />
+            </button>
+        </div>
+        @if (Prioridad is not null)
+        {
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>PrioridadId</th>
+                        <th>Descripción</th>
+                        <th>Dias Compromiso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var prioridad in Prioridad)
+                    {
+                        <tr>
+                            <td><a href="/RegistroDePrioridad/@prioridad.PrioridadId">Ver</a></td>
+                            <td>@prioridad.PrioridadId</td>
+                            <td>@prioridad.Descripcion</td>
+                            <td>@prioridad.DiasCompromiso</td>
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        }
+    </div>
+    <div class="card-footer">
+        <div class="form-row justify-content-sm-between" aria-orientation="vertical">
+        </div>
+    </div>
+</div>
+
+
+
+
+@code {
+    public List<Prioridades> Prioridad { get; set; } = new List<Prioridades>();
+    public string? Error { get; set; } = null;
+
+    [Parameter]
+    public int prioridadId { get; set; }
+
+
+
+    protected override void OnInitialized()
+    {
+        BuscarTodo();
+    }
+
+    private void BuscarTodo()
+    {
+
+        this.Prioridad = prioridadBLL.GetList();
+    }
+
+    private void BuscarId() => this.Prioridad = prioridadBLL.Buscar(prioridadId);
+
+} *@
