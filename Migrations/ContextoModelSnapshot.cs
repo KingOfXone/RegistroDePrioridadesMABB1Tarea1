@@ -51,6 +51,24 @@ namespace ClientesMABB.Migrations
 
                     b.ToTable("Clientes");
                 });
+
+            modelBuilder.Entity("RegistroDePrioridadesMABB1.Models.Prioridades", b =>
+                {
+                    b.Property<int>("PrioridadId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DiasCompromiso")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("PrioridadId");
+
+                    b.ToTable("Prioridades");
+                });
 #pragma warning restore 612, 618
         }
     }

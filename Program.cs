@@ -2,6 +2,7 @@ using ClientesMABB.Components;
 using ClientesMABB.DAL;
 using Microsoft.EntityFrameworkCore;
 using ClientesMABB.BLL;
+using RegistroDePrioridadesMABB1.BLL;
 
 
 namespace RegistroDePrioridadesMABB1
@@ -14,6 +15,7 @@ namespace RegistroDePrioridadesMABB1
             var ConStr = builder.Configuration.GetConnectionString("ConStr");
             builder.Services.AddDbContext<Contexto>(options => options.UseSqlite(ConStr));
             builder.Services.AddScoped<ClientesBLL>();
+             builder.Services.AddScoped<PrioridadesBLL>();
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
 

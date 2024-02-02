@@ -5,7 +5,7 @@
 namespace ClientesMABB.Migrations
 {
     /// <inheritdoc />
-    public partial class Clientes : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,6 +27,20 @@ namespace ClientesMABB.Migrations
                 {
                     table.PrimaryKey("PK_Clientes", x => x.ClienteId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Prioridades",
+                columns: table => new
+                {
+                    PrioridadId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Descripcion = table.Column<string>(type: "TEXT", nullable: false),
+                    DiasCompromiso = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prioridades", x => x.PrioridadId);
+                });
         }
 
         /// <inheritdoc />
@@ -34,6 +48,9 @@ namespace ClientesMABB.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Clientes");
+
+            migrationBuilder.DropTable(
+                name: "Prioridades");
         }
     }
 }
