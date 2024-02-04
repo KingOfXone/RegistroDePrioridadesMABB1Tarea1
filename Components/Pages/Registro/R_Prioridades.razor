@@ -1,4 +1,6 @@
-﻿@page "/RegistroDePrioridad"
+@page "/RegistroDePrioridad"
+@using RegistroDePrioridadesMABB1.BLL
+@using RegistroDePrioridadesMABB1.Models
 @inject PrioridadesBLL prioridadesBLL
 @rendermode InteractiveServer
 
@@ -100,7 +102,7 @@
         return Existe;
     }
 
-    public async Task Eliminar()
+    public void Eliminar()
     {
         var eliminado = prioridadesBLL.Eliminar(Prioridad.PrioridadId);
         if (eliminado)
